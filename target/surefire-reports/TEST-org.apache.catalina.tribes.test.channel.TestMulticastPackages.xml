@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite failures="2" time="48.168" errors="0" skipped="0" tests="5" name="org.apache.catalina.tribes.test.channel.TestMulticastPackages">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.6.0_22\jre\bin"/>
+    <property name="java.vm.version" value="17.1-b03"/>
+    <property name="java.vm.vendor" value="Sun Microsystems Inc."/>
+    <property name="java.vendor.url" value="http://java.sun.com/"/>
+    <property name="path.separator" value=";"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) Client VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.country" value="CN"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="Service Pack 1"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="D:\openproject\mywork\opensource\apache-tomcat-7.0.57"/>
+    <property name="java.runtime.version" value="1.6.0_22-b04"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.6.0_22\jre\lib\endorsed"/>
+    <property name="os.arch" value="x86"/>
+    <property name="java.io.tmpdir" value="C:\Users\hp\AppData\Local\Temp\"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows 7"/>
+    <property name="classworlds.conf" value="D:\openproject\mywork\workspace\thesecondwar\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf883822355613603942.tmp"/>
+    <property name="sun.jnu.encoding" value="GBK"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.6.0_22\bin;.;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Program Files/Java/jre6/bin/client;C:/Program Files/Java/jre6/bin;C:/Program Files/Java/jre6/lib/i386;E:\Ruby200\bin;C:\Program Files\AMD APP\bin\x86;E:\oracle\product\10.2.0\db_1\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files\Java\jdk1.6.0_22\bin;D:\openproject\mywork\projectbuildtool\apache-maven-3.1.1\bin;D:\openproject\mywork\projectbuildtool\apache-ant-1.9.2\bin;E:\MySQL\MySQL Server 5.1\bin;E:\Subversion\bin;E:\TortoiseSVN\bin;F:\cygwin\bin;F:\cygwin\usr\sbin;D:\openproject\mywork\servers\tomcat\apache-tomcat-7.0.47;E:\nodejs\;E:\Rational\common;D:\Python27;C:\Program Files\Microsoft Visual Studio\Common\Tools\WinNT;C:\Program Files\Microsoft Visual Studio\Common\MSDev98\Bin;C:\Program Files\Microsoft Visual Studio\Common\Tools;C:\Program Files\Microsoft Visual Studio\VC98\bin;C:\Users\hp\AppData\Roaming\npm;D:\openproject\mywork\tools\extspringsource\springsource\sts-3.4.0.RELEASE;"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="50.0"/>
+    <property name="sun.management.compiler" value="HotSpot Client Compiler"/>
+    <property name="os.version" value="6.1"/>
+    <property name="user.home" value="C:\Users\hp"/>
+    <property name="user.timezone" value="Asia/Shanghai"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.specification.version" value="1.6"/>
+    <property name="user.name" value="hp"/>
+    <property name="java.class.path" value="D:\openproject\mywork\projectbuildtool\apache-maven-3.1.1\boot\plexus-classworlds-2.5.1.jar"/>
+    <property name="org.slf4j.simpleLogger.defaultLogLevel" value="info"/>
+    <property name="java.vm.specification.version" value="1.0"/>
+    <property name="sun.arch.data.model" value="32"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk1.6.0_22\jre"/>
+    <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="user.language" value="zh"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.version" value="1.6.0_22"/>
+    <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.6.0_22\jre\lib\ext;C:\Windows\Sun\Java\lib\ext"/>
+    <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.6.0_22\jre\lib\resources.jar;C:\Program Files\Java\jdk1.6.0_22\jre\lib\rt.jar;C:\Program Files\Java\jdk1.6.0_22\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.6.0_22\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.6.0_22\jre\lib\jce.jar;C:\Program Files\Java\jdk1.6.0_22\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.6.0_22\jre\classes"/>
+    <property name="java.vendor" value="Sun Microsystems Inc."/>
+    <property name="maven.home" value="D:\openproject\mywork\projectbuildtool\apache-maven-3.1.1"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.vendor.url.bug" value="http://java.sun.com/cgi-bin/bugreport.cgi"/>
+    <property name="maven.bootclasspath" value="D:\openproject\mywork\projectbuildtool\apache-maven-3.1.1\boot\plexus-classworlds-2.5.1.jar"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.desktop" value="windows"/>
+    <property name="sun.cpu.isalist" value=""/>
+  </properties>
+  <testcase time="29.809" classname="org.apache.catalina.tribes.test.channel.TestMulticastPackages" name="testDataSendASYNCM">
+    <failure message="Checking success messages. expected:&lt;10000&gt; but was:&lt;7666&gt;" type="java.lang.AssertionError">java.lang.AssertionError: Checking success messages. expected:&lt;10000&gt; but was:&lt;7666&gt;
+	at org.junit.Assert.fail(Assert.java:74)
+	at org.junit.Assert.failNotEquals(Assert.java:448)
+	at org.junit.Assert.assertEquals(Assert.java:102)
+	at org.junit.Assert.assertEquals(Assert.java:323)
+	at org.apache.catalina.tribes.test.channel.TestMulticastPackages.testDataSendASYNCM(TestMulticastPackages.java:144)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.junit.internal.runners.TestMethod.invoke(TestMethod.java:59)
+	at org.junit.internal.runners.MethodRoadie.runTestMethod(MethodRoadie.java:98)
+	at org.junit.internal.runners.MethodRoadie$2.run(MethodRoadie.java:79)
+	at org.junit.internal.runners.MethodRoadie.runBeforesThenTestThenAfters(MethodRoadie.java:87)
+	at org.junit.internal.runners.MethodRoadie.runTest(MethodRoadie.java:77)
+	at org.junit.internal.runners.MethodRoadie.run(MethodRoadie.java:42)
+	at org.junit.internal.runners.JUnit4ClassRunner.invokeTestMethod(JUnit4ClassRunner.java:88)
+	at org.junit.internal.runners.JUnit4ClassRunner.runMethods(JUnit4ClassRunner.java:51)
+	at org.junit.internal.runners.JUnit4ClassRunner$1.run(JUnit4ClassRunner.java:44)
+	at org.junit.internal.runners.ClassRoadie.runUnprotected(ClassRoadie.java:27)
+	at org.junit.internal.runners.ClassRoadie.runProtected(ClassRoadie.java:37)
+	at org.junit.internal.runners.JUnit4ClassRunner.run(JUnit4ClassRunner.java:42)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+</failure>
+    <system-out>Thread[Thread-305] sent 500 messages in 27 ms.
+Thread[Thread-316] sent 500 messages in 8 ms.
+Thread[Thread-313] sent 500 messages in 7 ms.
+Thread[Thread-308] sent 500 messages in 174 ms.
+Thread[Thread-307] sent 500 messages in 182 ms.
+Thread[Thread-299] sent 500 messages in 190 ms.
+Thread[Thread-315] sent 500 messages in 222 ms.
+Thread[Thread-306] sent 500 messages in 290 ms.
+Thread[Thread-302] sent 500 messages in 306 ms.
+Thread[Thread-312] sent 500 messages in 320 ms.
+Thread[Thread-318] sent 500 messages in 351 ms.
+Thread[Thread-304] sent 500 messages in 364 ms.
+Thread[Thread-317] sent 500 messages in 337 ms.
+Thread[Thread-300] sent 500 messages in 373 ms.
+Thread[Thread-303] sent 500 messages in 393 ms.
+Thread[Thread-309] sent 500 messages in 467 ms.
+Thread[Thread-301] sent 500 messages in 474 ms.
+Thread[Thread-314] sent 500 messages in 458 ms.
+Thread[Thread-311] sent 500 messages in 489 ms.
+Thread[Thread-310] sent 500 messages in 498 ms.
+Sent 10000 messages. Received 7666 Highest msg received:9999
+Missing messages:0, 5, 115, 116, 117, 118, 119, 120, 205, 206, 207, 208, 209, 271, 272, 273, 291, 292, 293, 294, 295, 296, 412, 413, 414, 415, 416, 417, 418, 435, 436, 437, 438, 439, 452, 453, 454, 455, 456, 457, 458, 459, 548, 549, 574, 575, 576, 577, 578, 579, 580, 581, 582, 583, 584, 586, 587, 588, 589, 590, 591, 592, 608, 609, 610, 611, 612, 613, 614, 615, 616, 617, 618, 619, 620, 621, 622, 623, 624, 625, 626, 627, 628, 629, 630, 631, 632, 633, 634, 635, 636, 637, 638, 639, 640, 641, 642, 643, 644, 645, 646, 647, 648, 649, 650, 651, 652, 653, 654, 655, 656, 657, 658, 659, 661, 662, 663, 664, 665, 666, 667, 668, 669, 670, 671, 672, 673, 674, 675, 676, 677, 678, 679, 680, 681, 682, 683, 684, 685, 686, 687, 688, 689, 690, 691, 692, 693, 694, 695, 696, 697, 698, 699, 700, 701, 702, 703, 729, 730, 731, 732, 733, 734, 735, 736, 737, 738, 739, 740, 741, 742, 743, 744, 745, 746, 747, 748, 749, 750, 751, 752, 753, 754, 755, 756, 757, 758, 759, 760, 761, 762, 763, 764, 765, 766, 767, 768, 769, 770, 771, 772, 773, 774, 775, 776, 777, 778, 779, 780, 781, 782, 783, 784, 785, 786, 787, 788, 789, 790, 791, 792, 793, 794, 795, 796, 797, 798, 799, 800, 801, 802, 803, 804, 805, 806, 807, 808, 809, 810, 811, 812, 813, 814, 815, 816, 817, 818, 819, 820, 821, 822, 823, 824, 825, 826, 827, 828, 829, 830, 831, 832, 833, 834, 835, 836, 837, 838, 839, 840, 841, 842, 843, 844, 845, 846, 847, 848, 849, 850, 851, 852, 853, 854, 855, 856, 857, 858, 859, 860, 861, 862, 863, 864, 865, 866, 867, 868, 870, 871, 872, 873, 874, 875, 876, 877, 878, 879, 880, 881, 882, 883, 884, 885, 886, 887, 888, 889, 890, 891, 892, 893, 894, 895, 896, 897, 898, 899, 900, 901, 902, 903, 904, 905, 906, 907, 908, 909, 910, 911, 912, 913, 914, 915, 916, 917, 918, 919, 920, 921, 922, 923, 924, 925, 926, 927, 928, 929, 930, 931, 932, 933, 934, 935, 936, 937, 938, 939, 940, 941, 942, 943, 944, 945, 946, 947, 948, 949, 950, 951, 952, 953, 954, 955, 956, 957, 958, 959, 960, 961, 962, 963, 964, 965, 966, 967, 968, 969, 970, 971, 972, 973, 974, 975, 976, 977, 978, 979, 980, 981, 982, 983, 984, 985, 986, 987, 988, 989, 990, 991, 992, 993, 1020, 1021, 1022, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 1030, 1031, 1032, 1033, 1034, 1035, 1036, 1037, 1038, 1039, 1040, 1041, 1042, 1043, 1044, 1045, 1046, 1047, 1048, 1049, 1050, 1098, 1099, 1100, 1176, 1208, 1209, 1210, 1250, 1251, 1252, 1253, 1254, 1255, 1256, 1257, 1275, 1276, 1277, 1498, 1522, 1523, 1524, 1525, 1575, 1576, 1577, 1578, 1579, 1580, 1581, 1582, 1583, 1584, 1585, 1586, 1587, 1588, 1589, 1590, 1591, 1592, 1593, 1594, 1595, 1596, 1597, 1598, 1599, 1600, 1601, 1602, 1603, 1604, 1605, 1606, 1607, 1608, 1609, 1610, 1611, 1612, 1613, 1614, 1615, 1616, 1617, 1618, 1619, 1620, 1621, 1622, 1623, 1624, 1625, 1626, 1627, 1628, 1629, 1630, 1631, 1632, 1633, 1634, 1635, 1636, 1637, 1638, 1639, 1640, 1641, 1642, 1643, 1644, 1645, 1646, 1647, 1648, 1649, 1650, 1651, 1652, 1653, 1654, 1655, 1656, 1657, 1658, 1659, 1660, 1661, 1662, 1663, 1664, 1665, 1666, 1667, 1668, 1669, 1670, 1671, 1672, 1673, 1674, 1675, 1676, 1677, 1678, 1679, 1680, 1681, 1682, 1683, 1684, 1685, 1686, 1687, 1688, 1689, 1690, 1691, 1692, 1693, 1694, 1695, 1696, 1697, 1698, 1699, 1700, 1701, 1702, 1703, 1704, 1705, 1706, 1707, 1708, 1709, 1710, 1711, 1712, 1713, 1714, 1715, 1716, 1717, 1718, 1719, 1720, 1721, 1722, 1723, 1724, 1725, 1726, 1727, 1728, 1729, 1730, 1731, 1732, 1733, 1734, 1735, 1736, 1737, 1738, 1740, 1741, 1742, 1743, 1744, 1745, 1746, 1747, 1748, 1749, 1750, 1751, 1752, 1753, 1754, 1755, 1756, 1757, 1758, 1759, 1760, 1761, 1762, 1763, 1764, 1765, 1766, 1767, 1768, 1769, 1770, 1771, 1772, 1773, 1790, 1791, 1792, 1793, 1794, 1795, 1796, 1797, 1798, 1812, 1813, 1814, 1815, 1816, 1817, 1818, 1819, 1820, 1821, 1822, 1823, 1824, 1825, 1826, 1827, 1828, 1829, 1830, 1831, 1832, 1833, 1834, 1835, 1836, 1837, 1838, 1839, 1840, 1841, 1842, 1843, 1844, 1845, 1846, 1847, 1848, 1849, 1850, 1851, 1852, 1853, 1854, 1855, 1856, 1857, 1858, 1859, 1860, 1861, 1862, 1863, 1864, 1865, 1866, 1867, 1868, 1869, 1870, 1871, 1872, 1873, 1874, 1875, 1876, 1877, 1878, 1879, 1880, 1881, 1882, 1883, 1884, 1885, 1886, 1887, 1888, 1889, 1890, 1891, 1892, 1893, 1894, 1895, 1896, 1897, 1898, 1899, 1900, 1901, 1902, 1903, 1904, 1905, 1906, 1907, 1908, 1909, 1910, 1911, 1912, 1913, 1914, 1915, 1916, 1917, 1918, 1919, 1920, 1921, 1922, 1923, 1924, 1925, 1926, 1927, 1928, 1929, 1930, 1931, 1932, 1933, 1934, 1935, 1936, 1937, 1938, 1939, 1940, 1941, 1942, 1943, 1944, 1945, 1946, 1947, 1948, 1949, 1950, 1951, 1952, 1953, 1954, 1955, 1956, 1957, 1958, 1959, 1960, 1961, 1962, 1963, 1964, 1965, 1966, 1967, 1968, 1969, 1970, 1971, 1972, 1973, 1974, 1975, 1976, 1977, 1978, 1979, 1980, 1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030, 2031, 2032, 2033, 2034, 2035, 2036, 2037, 2038, 2039, 2040, 2041, 2042, 2043, 2044, 2045, 2046, 2047, 2048, 2049, 2050, 2051, 2052, 3202, 3203, 3204, 3205, 3206, 3207, 3208, 3209, 3210, 3211, 3212, 3213, 3214, 3215, 3216, 3217, 3218, 3219, 3220, 3221, 3222, 3223, 3224, 3225, 3226, 3227, 3228, 3229, 3230, 3231, 3232, 3233, 3234, 3235, 3236, 3237, 3238, 3239, 3240, 3241, 3242, 3243, 3244, 3245, 3246, 3247, 3248, 3249, 3250, 3251, 3252, 3253, 3254, 3255, 3256, 3257, 3258, 3259, 3260, 3261, 3262, 3263, 3264, 3265, 3266, 3267, 3268, 3269, 3270, 3271, 3272, 3273, 3274, 3275, 3276, 3277, 3278, 3279, 3280, 3281, 3282, 3283, 3284, 3285, 3286, 3287, 3288, 3289, 3290, 3291, 3292, 3293, 3294, 3295, 3296, 3297, 3298, 3299, 3300, 3301, 3302, 3303, 3304, 3305, 3306, 3307, 3308, 3309, 3310, 3311, 3312, 3313, 3314, 3315, 3316, 3317, 3318, 3319, 3320, 3321, 3322, 3323, 3324, 3325, 3326, 3327, 3328, 3329, 3330, 3331, 3332, 3333, 3334, 3335, 3336, 3337, 3338, 3339, 3340, 3341, 3342, 3343, 3344, 3345, 3346, 3347, 3348, 3349, 3350, 3351, 3352, 3353, 3354, 3355, 3356, 3357, 3358, 3359, 3360, 3361, 3362, 3363, 3364, 3365, 3366, 3367, 3368, 3369, 3370, 3371, 3372, 3373, 3374, 3375, 3376, 3377, 3378, 3379, 3380, 3381, 3382, 3383, 3384, 3385, 3386, 3387, 3388, 3389, 3390, 3391, 3392, 3393, 3394, 3395, 3396, 3397, 3398, 3399, 3400, 3401, 3402, 3403, 3404, 3405, 3406, 3407, 3408, 3409, 3410, 3411, 3412, 3413, 3414, 3415, 3416, 3417, 3418, 3419, 3420, 3421, 3422, 3423, 3424, 3425, 3426, 3427, 3428, 3429, 3430, 3431, 3432, 3433, 3434, 3435, 3436, 3437, 3438, 3439, 3440, 3441, 3442, 3443, 3444, 3445, 3446, 3447, 3448, 3449, 3450, 3451, 3452, 3453, 3454, 3455, 3456, 3457, 3458, 3459, 3460, 3461, 3462, 3463, 3464, 3465, 3466, 3467, 3468, 3469, 3470, 3471, 3472, 3473, 3474, 3475, 3476, 3477, 3478, 3479, 3480, 3481, 3482, 3483, 3484, 3485, 3486, 3487, 3488, 3489, 3490, 3491, 3492, 3493, 3494, 3495, 3496, 3497, 3498, 3499, 3500, 3501, 3502, 3503, 3504, 3505, 3506, 3507, 3508, 3509, 3510, 3511, 3512, 3513, 3514, 3515, 3516, 3517, 3518, 3519, 3520, 3521, 3522, 3523, 3524, 3525, 3526, 3527, 3528, 3529, 3530, 3531, 3532, 3533, 3534, 3535, 3536, 3537, 3538, 3539, 3540, 3541, 3542, 3543, 3544, 3545, 3557, 3558, 3559, 3560, 3561, 3562, 3563, 3564, 3565, 3566, 3567, 3568, 3569, 3570, 3571, 3572, 3573, 3574, 3575, 3576, 3577, 3578, 3579, 3580, 3581, 3582, 3583, 3584, 3585, 3586, 3587, 3588, 3589, 3590, 3591, 3592, 3593, 3594, 3595, 3596, 3597, 3598, 3599, 3600, 3601, 3613, 3614, 3615, 3616, 3617, 3618, 3619, 3620, 3621, 3622, 3623, 3624, 3625, 3626, 3869, 3870, 3960, 3961, 3962, 4348, 4349, 4350, 4351, 4352, 4353, 4354, 4355, 4356, 4357, 4358, 4359, 4360, 4361, 4362, 4363, 4364, 4365, 4366, 4367, 4368, 4369, 4370, 4371, 4372, 4373, 4374, 4375, 4376, 4377, 4378, 4379, 4380, 4381, 4382, 4383, 4384, 4385, 4386, 4387, 4388, 4389, 4390, 4391, 4392, 4393, 4394, 4395, 4396, 4397, 4398, 4399, 4400, 4401, 4402, 4403, 4404, 4405, 4406, 4407, 4408, 4409, 4410, 4411, 4412, 4413, 4414, 4415, 4416, 4417, 4418, 4419, 4420, 4421, 4422, 4423, 4424, 4425, 4426, 4427, 4428, 4429, 4430, 4431, 4432, 4433, 4434, 4435, 4436, 4437, 4438, 4439, 4440, 4441, 4442, 4443, 4444, 4445, 4446, 4447, 4448, 4449, 4450, 4451, 4452, 4453, 4454, 4455, 4456, 4457, 4458, 4459, 4460, 4461, 4462, 4463, 4464, 4465, 4466, 4467, 4468, 4469, 4470, 4471, 4472, 4473, 4474, 4475, 4476, 4477, 4478, 4479, 4480, 4481, 4482, 4483, 4484, 4485, 4486, 4487, 4488, 4489, 4490, 4491, 4492, 4493, 4494, 4495, 4496, 4497, 4498, 4499, 4500, 4501, 4502, 4503, 4504, 4505, 4506, 4507, 4508, 4509, 4510, 4511, 4512, 4513, 4514, 4515, 4516, 4517, 4518, 4519, 4520, 4521, 4522, 4523, 4524, 4525, 4526, 4527, 4528, 4529, 4530, 4531, 4532, 4533, 4534, 4535, 4536, 4537, 4538, 4539, 4540, 4541, 4542, 4543, 5095, 5096, 5231, 5232, 5233, 5309, 5310, 5311, 5312, 5313, 5314, 5315, 5316, 5317, 5318, 5319, 5320, 5321, 5322, 5323, 5324, 5325, 5326, 5327, 5328, 5329, 5330, 5331, 5332, 5333, 5334, 5335, 5336, 5337, 5338, 5339, 5340, 5341, 5342, 5343, 5344, 5345, 5346, 5347, 5348, 5349, 5350, 5351, 5352, 5353, 5354, 5355, 5356, 5357, 5358, 5359, 5360, 5361, 5362, 5363, 5364, 5365, 5366, 5367, 5368, 5369, 5370, 5371, 5372, 5373, 5374, 5386, 5387, 5388, 5389, 5390, 5391, 5392, 5393, 5394, 5395, 5396, 5397, 5398, 5399, 5400, 5401, 5402, 5403, 5404, 5405, 5406, 5407, 5408, 5409, 5410, 5411, 5412, 5413, 5414, 5415, 5416, 5417, 5418, 5419, 5420, 5421, 5422, 5423, 5424, 5425, 5426, 5427, 5428, 5429, 5430, 5431, 5432, 5433, 5434, 5435, 5436, 5437, 5438, 5439, 5440, 5441, 5442, 5443, 5444, 5445, 5446, 5447, 5448, 5449, 5450, 5451, 5452, 5453, 5454, 5455, 5456, 5457, 5458, 5459, 5460, 5461, 5462, 5463, 5464, 5465, 5466, 5467, 5468, 5469, 5470, 5471, 5472, 5473, 5474, 5475, 5476, 5477, 5478, 5479, 5480, 5481, 5482, 5483, 5484, 5485, 5486, 5487, 5488, 5489, 5490, 5491, 5492, 5493, 5494, 5495, 5496, 5497, 5498, 5499, 5500, 5501, 5502, 5503, 5504, 5505, 5506, 5507, 5508, 5509, 5510, 5511, 5512, 5513, 5514, 5515, 5516, 5517, 5518, 5519, 5520, 5521, 5522, 5523, 5524, 5525, 5526, 5527, 5528, 5529, 5530, 5531, 5532, 5533, 5534, 5535, 5536, 5537, 5538, 5539, 5540, 5541, 5542, 5543, 5544, 5545, 5546, 5547, 5548, 5549, 5550, 5551, 5552, 5553, 5554, 5555, 5556, 5557, 5558, 5559, 5560, 5561, 5562, 5563, 5564, 5565, 5566, 5576, 5577, 5578, 5579, 5580, 5581, 5592, 5634, 5635, 5727, 5728, 5729, 5730, 5731, 5820, 5821, 5913, 5914, 5915, 5916, 5917, 5918, 5919, 5920, 5921, 5922, 5923, 5924, 5925, 5926, 5927, 5928, 5929, 5930, 5931, 5932, 5933, 5934, 5935, 5936, 5937, 5938, 5939, 5940, 5941, 5942, 5943, 5944, 5945, 5946, 5947, 5948, 5949, 5950, 5951, 5952, 5953, 5954, 5955, 5956, 5957, 5958, 5959, 5960, 5961, 5962, 5963, 5964, 5965, 5966, 5967, 5968, 5969, 5970, 5971, 5972, 5973, 5974, 5975, 5976, 5977, 5978, 5979, 5980, 6053, 6144, 6238, 6240, 6334, 6335, 6336, 6337, 6338, 6373, 7052, 7053, 7054, 7055, 7056, 7057, 7058, 7059, 7060, 7061, 7062, 7063, 7064, 7065, 7066, 7067, 7068, 7069, 7070, 7071, 7072, 7073, 7074, 7075, 7076, 7077, 7078, 7079, 7080, 7081, 7082, 7083, 7084, 7085, 7086, 7087, 7088, 7089, 7090, 7091, 7092, 7093, 7094, 7095, 7096, 7097, 7098, 7099, 7100, 7101, 7102, 7103, 7104, 7105, 7106, 7107, 7108, 7109, 7110, 7111, 7112, 7113, 7114, 7115, 7934, 7935, 7936, 7937, 7938, 7939, 7940, 7941, 7942, 7943, 7944, 7945, 7946, 7947, 7948, 7949, 7950, 7951, 7952, 7953, 7954, 7955, 7956, 7957, 7958, 7959, 7960, 7961, 7962, 7963, 7964, 7965, 7966, 7967, 7968, 7969, 7970, 7971, 7972, 7973, 7974, 7975, 7976, 7978, 7979, 7980, 7981, 7982, 7983, 7984, 7985, 7986, 7987, 7988, 7989, 7990, 7991, 7992, 7993, 7994, 7995, 7996, 7997, 7998, 7999, 8000, 8001, 8002, 8003, 8004, 8005, 8006, 8007, 8008, 8009, 8010, 8011, 8012, 8013, 8014, 8015, 8016, 8017, 8018, 8019, 8020, 8021, 8022, 8023, 8024, 8025, 8026, 8027, 8028, 8029, 8030, 8031, 8032, 8033, 8034, 8035, 8036, 8037, 8038, 8039, 8040, 8041, 8042, 8043, 8044, 8045, 8046, 8047, 8048, 8049, 8050, 8051, 8173, 8174, 8175, 8176, 8177, 8178, 8179, 8180, 8181, 8182, 8183, 8184, 8185, 8186, 8187, 8188, 8189, 8190, 8191, 8192, 8193, 8194, 8195, 8196, 8197, 8198, 8199, 8200, 8201, 8202, 8203, 8204, 8205, 8206, 8207, 8208, 8209, 8210, 8211, 8212, 8213, 8214, 8215, 8216, 8217, 8218, 8219, 8220, 8221, 8222, 8223, 8224, 8225, 8226, 8227, 8228, 8229, 8230, 8231, 8232, 8233, 8234, 8235, 8236, 8237, 8238, 8239, 8240, 8241, 8242, 8243, 8244, 8245, 8246, 8247, 8248, 8249, 8250, 8251, 8252, 8253, 8254, 8255, 8256, 8257, 8258, 8259, 8260, 8261, 8262, 8263, 8264, 8265, 8266, 8267, 8268, 8269, 8270, 8271, 8272, 8273, 8274, 8275, 8276, 8277, 8278, 8279, 8280, 8281, 8282, 8283, 8284, 8285, 8286, 8287, 8288, 8289, 8290, 8291, 8292, 8293, 8294, 8295, 8296, 8297, 8298, 8299, 8300, 8301, 8302, 8303, 8304, 8305, 8306, 8307, 8308, 8309, 8310, 8311, 8312, 8313, 8314, 8315, 8316, 8317, 8318, 8319, 8320, 8321, 8322, 8323, 8324, 8325, 8326, 8327, 8328, 8329, 8330, 8331, 8332, 8333, 8334, 8335, 8336, 8337, 8338, 8339, 8340, 8341, 8342, 8343, 8344, 8345, 8346, 8347, 8348, 8349, 8350, 8351, 8352, 8353, 8354, 8355, 8356, 8357, 8358, 8359, 8360, 8361, 8362, 8363, 8364, 8365, 8366, 8367, 8368, 8369, 8370, 8371, 8372, 8373, 8374, 8375, 8376, 8377, 8378, 8379, 8380, 8381, 8382, 8383, 8384, 8385, 8386, 8387, 8388, 8389, 8390, 8391, 8392, 8393, 8394, 9669, 9674, 9675, 9676, 9677, 9678, 9679, 9680, 9681, 9682, 9683, 9684, 9685, 9686, 9687, 9688, 9689, 9690, 9691, 9692, 9693, 9694, 9695, 9696, 9697, 9698, 9699, 9700, 9701, 9702, 9703, 9704, 9705, 9706, 9707, 9708, 9709, 9710, 9711, 9712, 9713, 9714, 9715, 9716, 9717, 9718, 9719, 9720, 9721, 9722, 9723, 9724, 9725, 9726, 9727, 9730, 9731, 9732, 9733, 
+</system-out>
+    <system-err>2014-11-23 11:46:38 org.apache.catalina.tribes.transport.ReceiverBase bind
+��Ϣ: Receiver Server Socket bound to:/192.168.2.1:4000
+2014-11-23 11:46:38 org.apache.catalina.tribes.transport.ReceiverBase bindUdp
+��Ϣ: UDP Receiver Server Socket bound to:/192.168.2.1:50000
+2014-11-23 11:46:38 org.apache.catalina.tribes.membership.McastServiceImpl setupSocket
+��Ϣ: Setting cluster mcast soTimeout to 500
+2014-11-23 11:46:38 org.apache.catalina.tribes.membership.McastServiceImpl waitForMembers
+��Ϣ: Sleeping for 1000 milliseconds to establish cluster membership, start level:4
+2014-11-23 11:46:39 org.apache.catalina.tribes.membership.McastServiceImpl waitForMembers
+��Ϣ: Done sleeping, membership established, start level:4
+2014-11-23 11:46:39 org.apache.catalina.tribes.membership.McastServiceImpl waitForMembers
+��Ϣ: Sleeping for 1000 milliseconds to establish cluster membership, start level:8
+2014-11-23 11:46:40 org.apache.catalina.tribes.membership.McastServiceImpl waitForMembers
+��Ϣ: Done sleeping, membership established, start level:8
+2014-11-23 11:46:40 org.apache.catalina.tribes.transport.ReceiverBase bind
+��Ϣ: Receiver Server Socket bound to:/192.168.2.1:4001
+2014-11-23 11:46:40 org.apache.catalina.tribes.transport.ReceiverBase bindUdp
+��Ϣ: UDP Receiver Server Socket bound to:/192.168.2.1:50000
+2014-11-23 11:46:40 org.apache.catalina.tribes.membership.McastServiceImpl setupSocket
+��Ϣ: Setting cluster mcast soTimeout to 500
+2014-11-23 11:46:40 org.apache.catalina.tribes.membership.McastServiceImpl waitForMembers
+��Ϣ: Sleeping for 1000 milliseconds to establish cluster membership, start level:4
+2014-11-23 11:46:41 org.apache.catalina.tribes.membership.McastServiceImpl waitForMembers
+��Ϣ: Done sleeping, membership established, start level:4
+2014-11-23 11:46:41 org.apache.catalina.tribes.membership.McastServiceImpl waitForMembers
+��Ϣ: Sleeping for 1000 milliseconds to establish cluster membership, start level:8
+2014-11-23 11:46:42 org.apache.catalina.tribes.membership.McastServiceImpl waitForMembers
+��Ϣ: Done sleeping, membership established, start level:8
+Starting NO_ACK
+2014-11-23 11:46:43 org.apache.catalina.tribes.group.interceptors.ThroughputInterceptor report
+��Ϣ: ThroughputInterceptor Report[
+	Tx Msg:1 messages
+	Sent:0.00 MB (total)
+	Sent:0.00 MB (application)
+	Time:0.00 seconds
+	Tx Speed:? MB/sec (total)
+	TxSpeed:? MB/sec (application)
+	Error Msg:0
+	Rx Msg:512 messages
+	Rx Speed:�� MB/sec (since 1st msg)
+	Received:0.40 MB]
+
+SUCCESS:1000
+2014-11-23 11:46:43 org.apache.catalina.tribes.group.interceptors.ThroughputInterceptor report
+��Ϣ: ThroughputInterceptor Report[
+	Tx Msg:1 messages
+	Sent:0.00 MB (total)
+	Sent:0.00 MB (application)
+	Time:0.00 seconds
+	Tx Speed:? MB/sec (total)
+	TxSpeed:? MB/sec (application)
+	Error Msg:0
+	Rx Msg:1001 messages
+	Rx Speed:�� MB/sec (since 1st msg)
+	Received:0.79 MB]
+
+2014-11-23 11:46:43 org.apache.catalina.tribes.group.interceptors.ThroughputInterceptor report
+��Ϣ: ThroughputInterceptor Report[
+	Tx Msg:1 messages
+	Sent:0.00 MB (total)
+	Sent:0.00 MB (application)
+	Time:0.00 seconds
+	Tx Speed:? MB/sec (total)
+	TxSpeed:? MB/sec (application)
+	Error Msg:0
+	Rx Msg:1591 messages
+	Rx Speed:�� MB/sec (since 1st msg)
+	Received:1.25 MB]
+
+SUCCESS:2000
+2014-11-23 11:46:43 org.apache.catalina.tribes.group.interceptors.ThroughputInterceptor report
+��Ϣ: ThroughputInterceptor Report[
+	Tx Msg:1 messages
+	Sent:0.00 MB (total)
+	Sent:0.00 MB (application)
+	Time:0.00 seconds
+	Tx Speed:? MB/sec (total)
+	TxSpeed:? MB/sec (application)
+	Error Msg:0
+	Rx Msg:2239 messages
+	Rx Speed:�� MB/sec (since 1st msg)
+	Received:1.76 MB]
+
+2014-11-23 11:46:43 org.apache.catalina.tribes.group.interceptors.ThroughputInterceptor report
+��Ϣ: ThroughputInterceptor Report[
+	Tx Msg:1 messages
+	Sent:0.00 MB (total)
+	Sent:0.00 MB (application)
+	Time:0.00 seconds
+	Tx Speed:? MB/sec (total)
+	TxSpeed:? MB/sec (application)
+	Error Msg:0
+	Rx Msg:2503 messages
+	Rx Speed:�� MB/sec (since 1st msg)
+	Received:1.96 MB]
+
+2014-11-23 11:46:43 org.apache.catalina.tribes.group.interceptors.ThroughputInterceptor report
+��Ϣ: ThroughputInterceptor Report[
+	Tx Msg:1 messages
+	Sent:0.00 MB (total)
+	Sent:0.00 MB (application)
+	Time:0.00 seconds
+	Tx Speed:? MB/sec (total)
+	TxSpeed:? MB/sec (application)
+	Error Msg:0
+	Rx Msg:3000 messages
+	Rx Speed:�� MB/sec (since 1st msg)
+	Received:2.36 MB]
+
+SUCCESS:3000
+2014-11-23 11:46:43 org.apache.catalina.tribes.group.interceptors.ThroughputInterceptor report
+��Ϣ: ThroughputInterceptor Report[
+	Tx Msg:1 messages
+	Sent:0.00 MB (total)
+	Sent:0.00 MB (application)
+	Time:0.00 seconds
+	Tx Speed:? MB/sec (total)
+	TxSpeed:? MB/sec (application)
+	Error Msg:0
+	Rx Msg:3500 messages
+	Rx Speed:�� MB/sec (since 1st msg)
+	Received:2.74 MB]
+
+2014-11-23 11:46:43 org.apache.catalina.tribes.group.interceptors.ThroughputInterceptor report
+��Ϣ: ThroughputInterceptor Report[
+	Tx Msg:1 messages
+	Sent:0.00 MB (total)
+	Sent:0.00 MB (application)
+	Time:0.00 seconds
+	Tx Speed:? MB/sec (total)
+	TxSpeed:? MB/sec (application)
+	Error Msg:0
+	Rx Msg:4000 messages
+	Rx Speed:�� MB/sec (since 1st msg)
+	Received:3.14 MB]
+
+SUCCESS:4000
+2014-11-23 11:46:43 org.apache.catalina.tribes.group.interceptors.ThroughputInterceptor report
+��Ϣ: ThroughputInterceptor Report[
+	Tx Msg:1 messages
+	Sent:0.00 MB (total)
+	Sent:0.00 MB (application)
+	Time:0.00 seconds
+	Tx Speed:? MB/sec (total)
+	TxSpeed:? MB/sec (application)
+	Error Msg:0
+	Rx Msg:4500 messages
+	Rx Speed:�� MB/sec (since 1st msg)
+	Received:3.53 MB]
+
+2014-11-23 11:46:43 org.apache.catalina.tribes.group.interceptors.ThroughputInterceptor report
+��Ϣ: ThroughputInterceptor Report[
+	Tx Msg:1 messages
+	Sent:0.00 MB (total)
+	Sent:0.00 MB (application)
+	Time:0.00 seconds
+	Tx Speed:? MB/sec (total)
+	TxSpeed:? MB/sec (application)
+	Error Msg:0
+	Rx Msg:5000 messages
+	Rx Speed:�� MB/sec (since 1st msg)
+	Received:3.92 MB]
+
+SUCCESS:5000
+2014-11-23 11:46:43 org.apache.catalina.tribes.group.interceptors.ThroughputInterceptor report
+��Ϣ: ThroughputInterceptor Report[
+	Tx Msg:1 messages
+	Sent:0.00 MB (total)
+	Sent:0.00 MB (application)
+	Time:0.00 seconds
+	Tx Speed:? MB/sec (total)
+	TxSpeed:? MB/sec (application)
+	Error Msg:0
+	Rx Msg:5500 messages
+	Rx Speed:�� MB/sec (since 1st msg)
+	Received:4.31 MB]
+
+2014-11-23 11:46:43 org.apache.catalina.tribes.group.interceptors.ThroughputInterceptor report
+��Ϣ: ThroughputInterceptor Report[
+	Tx Msg:1 messages
+	Sent:0.00 MB (total)
+	Sent:0.00 MB (application)
+	Time:0.00 seconds
+	Tx Speed:? MB/sec (total)
+	TxSpeed:? MB/sec (application)
+	Error Msg:0
+	Rx Msg:6000 messages
+	Rx Speed:�� MB/sec (since 1st msg)
+	Received:4.71 MB]
+
+SUCCESS:6000
+2014-11-23 11:46:43 org.apache.catalina.tribes.group.interceptors.ThroughputInterceptor report
+��Ϣ: ThroughputInterceptor Report[
+	Tx Msg:1 messages
+	Sent:0.00 MB (total)
+	Sent:0.00 MB (application)
+	Time:0.00 seconds
+	Tx Speed:? MB/sec (total)
+	TxSpeed:? MB/sec (application)
+	Error Msg:0
+	Rx Msg:6500 messages
+	Rx Speed:�� MB/sec (since 1st msg)
+	Received:5.10 MB]
+
+2014-11-23 11:46:43 org.apache.catalina.tribes.group.interceptors.ThroughputInterceptor report
+��Ϣ: ThroughputInterceptor Report[
+	Tx Msg:1 messages
+	Sent:0.00 MB (total)
+	Sent:0.00 MB (application)
+	Time:0.00 seconds
+	Tx Speed:? MB/sec (total)
+	TxSpeed:? MB/sec (application)
+	Error Msg:0
+	Rx Msg:7000 messages
+	Rx Speed:�� MB/sec (since 1st msg)
+	Received:5.49 MB]
+
+SUCCESS:7000
+2014-11-23 11:46:43 org.apache.catalina.tribes.group.interceptors.ThroughputInterceptor report
+��Ϣ: ThroughputInterceptor Report[
+	Tx Msg:1 messages
+	Sent:0.00 MB (total)
+	Sent:0.00 MB (application)
+	Time:0.00 seconds
+	Tx Speed:? MB/sec (total)
+	TxSpeed:? MB/sec (application)
+	Error Msg:0
+	Rx Msg:7500 messages
+	Rx Speed:5.87 MB/sec (since 1st msg)
+	Received:5.87 MB]
+
+Finished NO_ACK [7666]
+</system-err>
+  </testcase>
+  <testcase time="4.672" classname="org.apache.catalina.tribes.test.channel.TestMulticastPackages" name="testDataSendASYNC"/>
+  <testcase time="4.385" classname="org.apache.catalina.tribes.test.channel.TestMulticastPackages" name="testDataSendACK">
+    <failure message="Checking success messages. expected:&lt;500&gt; but was:&lt;496&gt;" type="java.lang.AssertionError">java.lang.AssertionError: Checking success messages. expected:&lt;500&gt; but was:&lt;496&gt;
+	at org.junit.Assert.fail(Assert.java:74)
+	at org.junit.Assert.failNotEquals(Assert.java:448)
+	at org.junit.Assert.assertEquals(Assert.java:102)
+	at org.junit.Assert.assertEquals(Assert.java:323)
+	at org.apache.catalina.tribes.test.channel.TestMulticastPackages.testDataSendACK(TestMulticastPackages.java:164)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.junit.internal.runners.TestMethod.invoke(TestMethod.java:59)
+	at org.junit.internal.runners.MethodRoadie.runTestMethod(MethodRoadie.java:98)
+	at org.junit.internal.runners.MethodRoadie$2.run(MethodRoadie.java:79)
+	at org.junit.internal.runners.MethodRoadie.runBeforesThenTestThenAfters(MethodRoadie.java:87)
+	at org.junit.internal.runners.MethodRoadie.runTest(MethodRoadie.java:77)
+	at org.junit.internal.runners.MethodRoadie.run(MethodRoadie.java:42)
+	at org.junit.internal.runners.JUnit4ClassRunner.invokeTestMethod(JUnit4ClassRunner.java:88)
+	at org.junit.internal.runners.JUnit4ClassRunner.runMethods(JUnit4ClassRunner.java:51)
+	at org.junit.internal.runners.JUnit4ClassRunner$1.run(JUnit4ClassRunner.java:44)
+	at org.junit.internal.runners.ClassRoadie.runUnprotected(ClassRoadie.java:27)
+	at org.junit.internal.runners.ClassRoadie.runProtected(ClassRoadie.java:37)
+	at org.junit.internal.runners.JUnit4ClassRunner.run(JUnit4ClassRunner.java:42)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+</failure>
+    <system-err>2014-11-23 11:47:13 org.apache.catalina.tribes.transport.ReceiverBase bind
+��Ϣ: Receiver Server Socket bound to:/192.168.2.1:4000
+2014-11-23 11:47:13 org.apache.catalina.tribes.transport.ReceiverBase bindUdp
+��Ϣ: UDP Receiver Server Socket bound to:/192.168.2.1:50000
+2014-11-23 11:47:13 org.apache.catalina.tribes.membership.McastServiceImpl setupSocket
+��Ϣ: Setting cluster mcast soTimeout to 500
+2014-11-23 11:47:13 org.apache.catalina.tribes.membership.McastServiceImpl waitForMembers
+��Ϣ: Sleeping for 1000 milliseconds to establish cluster membership, start level:4
+2014-11-23 11:47:14 org.apache.catalina.tribes.membership.McastServiceImpl waitForMembers
+��Ϣ: Done sleeping, membership established, start level:4
+2014-11-23 11:47:14 org.apache.catalina.tribes.membership.McastServiceImpl waitForMembers
+��Ϣ: Sleeping for 1000 milliseconds to establish cluster membership, start level:8
+2014-11-23 11:47:15 org.apache.catalina.tribes.membership.McastServiceImpl waitForMembers
+��Ϣ: Done sleeping, membership established, start level:8
+2014-11-23 11:47:15 org.apache.catalina.tribes.transport.ReceiverBase bind
+��Ϣ: Receiver Server Socket bound to:/192.168.2.1:4001
+2014-11-23 11:47:15 org.apache.catalina.tribes.transport.ReceiverBase bindUdp
+��Ϣ: UDP Receiver Server Socket bound to:/192.168.2.1:50000
+2014-11-23 11:47:15 org.apache.catalina.tribes.membership.McastServiceImpl setupSocket
+��Ϣ: Setting cluster mcast soTimeout to 500
+2014-11-23 11:47:15 org.apache.catalina.tribes.membership.McastServiceImpl waitForMembers
+��Ϣ: Sleeping for 1000 milliseconds to establish cluster membership, start level:4
+2014-11-23 11:47:16 org.apache.catalina.tribes.membership.McastServiceImpl waitForMembers
+��Ϣ: Done sleeping, membership established, start level:4
+2014-11-23 11:47:16 org.apache.catalina.tribes.membership.McastServiceImpl waitForMembers
+��Ϣ: Sleeping for 1000 milliseconds to establish cluster membership, start level:8
+2014-11-23 11:47:17 org.apache.catalina.tribes.membership.McastServiceImpl waitForMembers
+��Ϣ: Done sleeping, membership established, start level:8
+Starting ACK
+Finished ACK
+</system-err>
+  </testcase>
+  <testcase time="4.629" classname="org.apache.catalina.tribes.test.channel.TestMulticastPackages" name="testDataSendSYNCACK"/>
+  <testcase time="4.673" classname="org.apache.catalina.tribes.test.channel.TestMulticastPackages" name="testSingleDataSendNO_ACK"/>
+</testsuite>

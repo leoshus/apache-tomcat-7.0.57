@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite failures="0" time="4.103" errors="1" skipped="0" tests="1" name="org.apache.catalina.tribes.test.channel.TestRemoteProcessException">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.6.0_22\jre\bin"/>
+    <property name="java.vm.version" value="17.1-b03"/>
+    <property name="java.vm.vendor" value="Sun Microsystems Inc."/>
+    <property name="java.vendor.url" value="http://java.sun.com/"/>
+    <property name="path.separator" value=";"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) Client VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.country" value="CN"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="Service Pack 1"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="D:\openproject\mywork\opensource\apache-tomcat-7.0.57"/>
+    <property name="java.runtime.version" value="1.6.0_22-b04"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.6.0_22\jre\lib\endorsed"/>
+    <property name="os.arch" value="x86"/>
+    <property name="java.io.tmpdir" value="C:\Users\hp\AppData\Local\Temp\"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows 7"/>
+    <property name="classworlds.conf" value="D:\openproject\mywork\workspace\thesecondwar\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf883822355613603942.tmp"/>
+    <property name="sun.jnu.encoding" value="GBK"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.6.0_22\bin;.;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Program Files/Java/jre6/bin/client;C:/Program Files/Java/jre6/bin;C:/Program Files/Java/jre6/lib/i386;E:\Ruby200\bin;C:\Program Files\AMD APP\bin\x86;E:\oracle\product\10.2.0\db_1\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files\Java\jdk1.6.0_22\bin;D:\openproject\mywork\projectbuildtool\apache-maven-3.1.1\bin;D:\openproject\mywork\projectbuildtool\apache-ant-1.9.2\bin;E:\MySQL\MySQL Server 5.1\bin;E:\Subversion\bin;E:\TortoiseSVN\bin;F:\cygwin\bin;F:\cygwin\usr\sbin;D:\openproject\mywork\servers\tomcat\apache-tomcat-7.0.47;E:\nodejs\;E:\Rational\common;D:\Python27;C:\Program Files\Microsoft Visual Studio\Common\Tools\WinNT;C:\Program Files\Microsoft Visual Studio\Common\MSDev98\Bin;C:\Program Files\Microsoft Visual Studio\Common\Tools;C:\Program Files\Microsoft Visual Studio\VC98\bin;C:\Users\hp\AppData\Roaming\npm;D:\openproject\mywork\tools\extspringsource\springsource\sts-3.4.0.RELEASE;"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="50.0"/>
+    <property name="sun.management.compiler" value="HotSpot Client Compiler"/>
+    <property name="os.version" value="6.1"/>
+    <property name="user.home" value="C:\Users\hp"/>
+    <property name="user.timezone" value="Asia/Shanghai"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.specification.version" value="1.6"/>
+    <property name="user.name" value="hp"/>
+    <property name="java.class.path" value="D:\openproject\mywork\projectbuildtool\apache-maven-3.1.1\boot\plexus-classworlds-2.5.1.jar"/>
+    <property name="org.slf4j.simpleLogger.defaultLogLevel" value="info"/>
+    <property name="java.vm.specification.version" value="1.0"/>
+    <property name="sun.arch.data.model" value="32"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk1.6.0_22\jre"/>
+    <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="user.language" value="zh"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.version" value="1.6.0_22"/>
+    <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.6.0_22\jre\lib\ext;C:\Windows\Sun\Java\lib\ext"/>
+    <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.6.0_22\jre\lib\resources.jar;C:\Program Files\Java\jdk1.6.0_22\jre\lib\rt.jar;C:\Program Files\Java\jdk1.6.0_22\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.6.0_22\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.6.0_22\jre\lib\jce.jar;C:\Program Files\Java\jdk1.6.0_22\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.6.0_22\jre\classes"/>
+    <property name="java.vendor" value="Sun Microsystems Inc."/>
+    <property name="maven.home" value="D:\openproject\mywork\projectbuildtool\apache-maven-3.1.1"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.vendor.url.bug" value="http://java.sun.com/cgi-bin/bugreport.cgi"/>
+    <property name="maven.bootclasspath" value="D:\openproject\mywork\projectbuildtool\apache-maven-3.1.1\boot\plexus-classworlds-2.5.1.jar"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.desktop" value="windows"/>
+    <property name="sun.cpu.isalist" value=""/>
+  </properties>
+  <testcase time="4.103" classname="org.apache.catalina.tribes.test.channel.TestRemoteProcessException" name="testDataSendSYNCACK">
+    <error message="Send failed, attempt:2 max:1; Faulty members:tcp://{192, 168, 2, 1}:4001; " type="org.apache.catalina.tribes.ChannelException">org.apache.catalina.tribes.ChannelException: Send failed, attempt:2 max:1; Faulty members:tcp://{192, 168, 2, 1}:4001; 
+	at org.apache.catalina.tribes.transport.nio.ParallelNioSender.doLoop(ParallelNioSender.java:187)
+	at org.apache.catalina.tribes.transport.nio.ParallelNioSender.sendMessage(ParallelNioSender.java:89)
+	at org.apache.catalina.tribes.transport.nio.PooledParallelSender.sendMessage(PooledParallelSender.java:54)
+	at org.apache.catalina.tribes.transport.ReplicationTransmitter.sendMessage(ReplicationTransmitter.java:78)
+	at org.apache.catalina.tribes.group.ChannelCoordinator.sendMessage(ChannelCoordinator.java:77)
+	at org.apache.catalina.tribes.group.ChannelInterceptorBase.sendMessage(ChannelInterceptorBase.java:77)
+	at org.apache.catalina.tribes.group.ChannelInterceptorBase.sendMessage(ChannelInterceptorBase.java:77)
+	at org.apache.catalina.tribes.group.GroupChannel.send(GroupChannel.java:224)
+	at org.apache.catalina.tribes.group.GroupChannel.send(GroupChannel.java:182)
+	at org.apache.catalina.tribes.test.channel.TestRemoteProcessException.testDataSendSYNCACK(TestRemoteProcessException.java:76)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.junit.internal.runners.TestMethod.invoke(TestMethod.java:59)
+	at org.junit.internal.runners.MethodRoadie.runTestMethod(MethodRoadie.java:98)
+	at org.junit.internal.runners.MethodRoadie$2.run(MethodRoadie.java:79)
+	at org.junit.internal.runners.MethodRoadie.runBeforesThenTestThenAfters(MethodRoadie.java:87)
+	at org.junit.internal.runners.MethodRoadie.runTest(MethodRoadie.java:77)
+	at org.junit.internal.runners.MethodRoadie.run(MethodRoadie.java:42)
+	at org.junit.internal.runners.JUnit4ClassRunner.invokeTestMethod(JUnit4ClassRunner.java:88)
+	at org.junit.internal.runners.JUnit4ClassRunner.runMethods(JUnit4ClassRunner.java:51)
+	at org.junit.internal.runners.JUnit4ClassRunner$1.run(JUnit4ClassRunner.java:44)
+	at org.junit.internal.runners.ClassRoadie.runUnprotected(ClassRoadie.java:27)
+	at org.junit.internal.runners.ClassRoadie.runProtected(ClassRoadie.java:37)
+	at org.junit.internal.runners.JUnit4ClassRunner.run(JUnit4ClassRunner.java:42)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+Caused by: org.apache.catalina.tribes.RemoteProcessException: Received a failed ack:org.apache.catalina.tribes.transport.Constants.FAIL_ACK_DATA
+	at org.apache.catalina.tribes.transport.nio.NioSender.read(NioSender.java:181)
+	at org.apache.catalina.tribes.transport.nio.NioSender.process(NioSender.java:119)
+	at org.apache.catalina.tribes.transport.nio.ParallelNioSender.doLoop(ParallelNioSender.java:142)
+	... 37 more
+</error>
+    <system-err>2014-11-23 11:47:27 org.apache.catalina.tribes.transport.ReceiverBase bind
+��Ϣ: Receiver Server Socket bound to:/192.168.2.1:4000
+2014-11-23 11:47:27 org.apache.catalina.tribes.membership.McastServiceImpl setupSocket
+��Ϣ: Setting cluster mcast soTimeout to 500
+2014-11-23 11:47:27 org.apache.catalina.tribes.membership.McastServiceImpl waitForMembers
+��Ϣ: Sleeping for 1000 milliseconds to establish cluster membership, start level:4
+2014-11-23 11:47:28 org.apache.catalina.tribes.membership.McastServiceImpl waitForMembers
+��Ϣ: Done sleeping, membership established, start level:4
+2014-11-23 11:47:28 org.apache.catalina.tribes.membership.McastServiceImpl waitForMembers
+��Ϣ: Sleeping for 1000 milliseconds to establish cluster membership, start level:8
+2014-11-23 11:47:29 org.apache.catalina.tribes.membership.McastServiceImpl waitForMembers
+��Ϣ: Done sleeping, membership established, start level:8
+2014-11-23 11:47:29 org.apache.catalina.tribes.transport.ReceiverBase bind
+��Ϣ: Receiver Server Socket bound to:/192.168.2.1:4001
+2014-11-23 11:47:29 org.apache.catalina.tribes.membership.McastServiceImpl setupSocket
+��Ϣ: Setting cluster mcast soTimeout to 500
+2014-11-23 11:47:29 org.apache.catalina.tribes.membership.McastServiceImpl waitForMembers
+��Ϣ: Sleeping for 1000 milliseconds to establish cluster membership, start level:4
+2014-11-23 11:47:30 org.apache.catalina.tribes.membership.McastServiceImpl waitForMembers
+��Ϣ: Done sleeping, membership established, start level:4
+2014-11-23 11:47:30 org.apache.catalina.tribes.membership.McastServiceImpl waitForMembers
+��Ϣ: Sleeping for 1000 milliseconds to establish cluster membership, start level:8
+2014-11-23 11:47:31 org.apache.catalina.tribes.membership.McastServiceImpl waitForMembers
+��Ϣ: Done sleeping, membership established, start level:8
+Starting SYNC_ACK
+2014-11-23 11:47:31 org.apache.catalina.tribes.group.GroupChannel messageReceived
+����: Error receiving message:
+java.lang.IllegalArgumentException
+	at org.apache.catalina.tribes.test.channel.TestRemoteProcessException$Listener.messageReceived(TestRemoteProcessException.java:106)
+	at org.apache.catalina.tribes.group.GroupChannel.messageReceived(GroupChannel.java:278)
+	at org.apache.catalina.tribes.group.ChannelInterceptorBase.messageReceived(ChannelInterceptorBase.java:82)
+	at org.apache.catalina.tribes.group.interceptors.DomainFilterInterceptor.messageReceived(DomainFilterInterceptor.java:47)
+	at org.apache.catalina.tribes.group.ChannelInterceptorBase.messageReceived(ChannelInterceptorBase.java:82)
+	at org.apache.catalina.tribes.group.ChannelCoordinator.messageReceived(ChannelCoordinator.java:252)
+	at org.apache.catalina.tribes.transport.ReceiverBase.messageDataReceived(ReceiverBase.java:287)
+	at org.apache.catalina.tribes.transport.nio.NioReplicationTask.drainChannel(NioReplicationTask.java:210)
+	at org.apache.catalina.tribes.transport.nio.NioReplicationTask.run(NioReplicationTask.java:99)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:908)
+	at java.lang.Thread.run(Thread.java:662)
+2014-11-23 11:47:31 org.apache.catalina.tribes.transport.nio.ParallelNioSender doLoop
+����: Member send is failing for:tcp://{192, 168, 2, 1}:4001 ; Setting to suspect and retrying.
+2014-11-23 11:47:31 org.apache.catalina.tribes.group.GroupChannel messageReceived
+����: Error receiving message:
+java.lang.IllegalArgumentException
+	at org.apache.catalina.tribes.test.channel.TestRemoteProcessException$Listener.messageReceived(TestRemoteProcessException.java:106)
+	at org.apache.catalina.tribes.group.GroupChannel.messageReceived(GroupChannel.java:278)
+	at org.apache.catalina.tribes.group.ChannelInterceptorBase.messageReceived(ChannelInterceptorBase.java:82)
+	at org.apache.catalina.tribes.group.interceptors.DomainFilterInterceptor.messageReceived(DomainFilterInterceptor.java:47)
+	at org.apache.catalina.tribes.group.ChannelInterceptorBase.messageReceived(ChannelInterceptorBase.java:82)
+	at org.apache.catalina.tribes.group.ChannelCoordinator.messageReceived(ChannelCoordinator.java:252)
+	at org.apache.catalina.tribes.transport.ReceiverBase.messageDataReceived(ReceiverBase.java:287)
+	at org.apache.catalina.tribes.transport.nio.NioReplicationTask.drainChannel(NioReplicationTask.java:210)
+	at org.apache.catalina.tribes.transport.nio.NioReplicationTask.run(NioReplicationTask.java:99)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:908)
+	at java.lang.Thread.run(Thread.java:662)
+2014-11-23 11:47:31 org.apache.catalina.tribes.group.GroupChannel messageReceived
+����: Error receiving message:
+java.lang.IllegalArgumentException
+	at org.apache.catalina.tribes.test.channel.TestRemoteProcessException$Listener.messageReceived(TestRemoteProcessException.java:106)
+	at org.apache.catalina.tribes.group.GroupChannel.messageReceived(GroupChannel.java:278)
+	at org.apache.catalina.tribes.group.ChannelInterceptorBase.messageReceived(ChannelInterceptorBase.java:82)
+	at org.apache.catalina.tribes.group.interceptors.DomainFilterInterceptor.messageReceived(DomainFilterInterceptor.java:47)
+	at org.apache.catalina.tribes.group.ChannelInterceptorBase.messageReceived(ChannelInterceptorBase.java:82)
+	at org.apache.catalina.tribes.group.ChannelCoordinator.messageReceived(ChannelCoordinator.java:252)
+	at org.apache.catalina.tribes.transport.ReceiverBase.messageDataReceived(ReceiverBase.java:287)
+	at org.apache.catalina.tribes.transport.nio.NioReplicationTask.drainChannel(NioReplicationTask.java:210)
+	at org.apache.catalina.tribes.transport.nio.NioReplicationTask.run(NioReplicationTask.java:99)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:908)
+	at java.lang.Thread.run(Thread.java:662)
+</system-err>
+  </testcase>
+</testsuite>
