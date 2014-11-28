@@ -220,18 +220,25 @@ public final class Bootstrap {
     {
 
         // Set Catalina path
+    	//设置Catalina.home目录 默认为当前工作路径 即user.dir
         setCatalinaHome();
-        setCatalinaBase();
-
+        setCatalinaBase();//如果Catalina.home不为空 则值为Catalina.home
+        //初始化类加载器classLoader
+        //读取Catalina.home/conf下的Catalina.properties文件 if not exist 
+    	//则使用Catalina.home/bin下的Bootstrap.jar里的/org/apache/catalina/startup/catalina.properties
+        //读取Catalina.properties关于classLoader的加载信息 配置来初始化classLoader 
+        //如果没有配置,则默认使用当前的类加载器 分别初始化common.loader shared.loader server.loader
+        //common.loader为shared.loader/server.loader的父加载器
         initClassLoaders();
-
+        //将CatalinaLoader加载器放到当前线程中
         Thread.currentThread().setContextClassLoader(catalinaLoader);
-
+        //预加载tomcat核心类
         SecurityClassLoad.securityClassLoad(catalinaLoader);
 
         // Load our startup class and call its process() method
         if (log.isDebugEnabled())
             log.debug("Loading startup class");
+        //通过反射实例化Catalina实例对象
         Class<?> startupClass =
             catalinaLoader.loadClass
             ("org.apache.catalina.startup.Catalina");
@@ -422,6 +429,7 @@ public final class Bootstrap {
             // Don't set daemon until init() has completed
             Bootstrap bootstrap = new Bootstrap();
             try {
+            	//初始化 classLoader与tomcat启动实例对象Catalina
                 bootstrap.init();
             } catch (Throwable t) {
                 handleThrowable(t);
@@ -444,6 +452,7 @@ public final class Bootstrap {
 
             if (command.equals("startd")) {
                 args[args.length - 1] = "start";
+                //反射调用Catalina对象的load(xx)方法 启动tomcat入口
                 daemon.load(args);
                 daemon.start();
             } else if (command.equals("stopd")) {
