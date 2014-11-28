@@ -771,7 +771,7 @@ public final class StandardServer extends LifecycleMBeanBase implements Server {
      */
     @Override
     protected void initInternal() throws LifecycleException {
-        
+        //初始化MBeanServer
         super.initInternal();
 
         // Register global String cache
@@ -816,6 +816,7 @@ public final class StandardServer extends LifecycleMBeanBase implements Server {
                 cl = cl.getParent();
             }
         }
+        //初始化我们定义的与当前server关联的service的组件
         // Initialize our defined Services
         for (int i = 0; i < services.length; i++) {
             services[i].init();

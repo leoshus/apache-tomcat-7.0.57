@@ -541,6 +541,7 @@ public class StandardService extends LifecycleMBeanBase implements Service {
         super.initInternal();
         
         if (container != null) {
+        	//engine容器初始化 tomcat默认server.xml里的<service>元素下是<engine>
             container.init();
         }
 

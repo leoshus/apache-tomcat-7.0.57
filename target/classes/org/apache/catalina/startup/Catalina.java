@@ -540,20 +540,22 @@ public class Catalina {
     public void load() {
 
         long t1 = System.nanoTime();
-
+        //初始化 check Catalina.home /catalina.base /java.io.tmpdir的directory
         initDirs();
 
         // Before digester - it may be needed
-
+        //设置附加的参数 如Catalina.usingNaming
         initNaming();
 
         // Create and execute our Digester
+        //创建Digester对象 设置好Rule 为解析Catalina.base/conf/server.xml做好准备
         Digester digester = createStartDigester();
 
         InputSource inputSource = null;
         InputStream inputStream = null;
         File file = null;
         try {
+        	//获取Catalina.home/conf/server.xml文件
             file = configFile();
             inputStream = new FileInputStream(file);
             inputSource = new InputSource(file.toURI().toURL().toString());
@@ -611,8 +613,8 @@ public class Catalina {
 
         try {
             inputSource.setByteStream(inputStream);
-            digester.push(this);
-            digester.parse(inputSource);
+            digester.push(this);//将当前Catalina对象压入Digester栈底部
+            digester.parse(inputSource);//通过Rule解析server.xml文件中的元素成对象
         } catch (SAXParseException spe) {
             log.warn("Catalina.start using " + getConfigFile() + ": " +
                     spe.getMessage());
@@ -627,14 +629,16 @@ public class Catalina {
                 // Ignore
             }
         }
-
+        //设置server与Catalina的关联关系
         getServer().setCatalina(this);
-
+        //用一个自定义的PrintStream替换默认的System.out和System.err
         // Stream redirection
         initStreams();
 
         // Start the new server
         try {
+        	//执行org.apache.catalina.core.StandardServer继承的Lifecycle的默认实现类LifecycleBase 的init方法
+        	//继而调用StandardServer.init
             getServer().init();
         } catch (LifecycleException e) {
             if (Boolean.getBoolean("org.apache.catalina.startup.EXIT_ON_INIT_FAILURE")) {
@@ -701,7 +705,7 @@ public class Catalina {
         if(log.isInfoEnabled()) {
             log.info("Server startup in " + ((t2 - t1) / 1000000) + " ms");
         }
-
+        //注册关闭钩子
         // Register shutdown hook
         if (useShutdownHook) {
             if (shutdownHook == null) {

@@ -323,7 +323,7 @@ public final class Bootstrap {
     public void start()
         throws Exception {
         if( catalinaDaemon==null ) init();
-
+        //调用Catalina的start方法
         Method method = catalinaDaemon.getClass().getMethod("start", (Class [] )null);
         method.invoke(catalinaDaemon, (Object [])null);
 
@@ -454,6 +454,7 @@ public final class Bootstrap {
                 args[args.length - 1] = "start";
                 //反射调用Catalina对象的load(xx)方法 启动tomcat入口
                 daemon.load(args);
+                //触发start事件
                 daemon.start();
             } else if (command.equals("stopd")) {
                 args[args.length - 1] = "stop";
