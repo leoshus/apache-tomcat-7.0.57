@@ -220,25 +220,25 @@ public final class Bootstrap {
     {
 
         // Set Catalina path
-    	//ÉèÖÃCatalina.homeÄ¿Â¼ Ä¬ÈÏÎªµ±Ç°¹¤×÷Â·¾¶ ¼´user.dir
+    	//è®¾ç½®Catalina.homeç›®å½• é»˜è®¤ä¸ºå½“å‰å·¥ä½œè·¯å¾„ å³user.dir
         setCatalinaHome();
-        setCatalinaBase();//Èç¹ûCatalina.home²»Îª¿Õ ÔòÖµÎªCatalina.home
-        //³õÊ¼»¯Àà¼ÓÔØÆ÷classLoader
-        //¶ÁÈ¡Catalina.home/confÏÂµÄCatalina.propertiesÎÄ¼ş if not exist 
-    	//ÔòÊ¹ÓÃCatalina.home/binÏÂµÄBootstrap.jarÀïµÄ/org/apache/catalina/startup/catalina.properties
-        //¶ÁÈ¡Catalina.properties¹ØÓÚclassLoaderµÄ¼ÓÔØĞÅÏ¢ ÅäÖÃÀ´³õÊ¼»¯classLoader 
-        //Èç¹ûÃ»ÓĞÅäÖÃ,ÔòÄ¬ÈÏÊ¹ÓÃµ±Ç°µÄÀà¼ÓÔØÆ÷ ·Ö±ğ³õÊ¼»¯common.loader shared.loader server.loader
-        //common.loaderÎªshared.loader/server.loaderµÄ¸¸¼ÓÔØÆ÷
+        setCatalinaBase();//å¦‚æœCatalina.homeä¸ä¸ºç©º åˆ™å€¼ä¸ºCatalina.home
+        //åˆå§‹åŒ–ç±»åŠ è½½å™¨classLoader
+        //è¯»å–Catalina.home/confä¸‹çš„Catalina.propertiesæ–‡ä»¶ if not exist 
+    	//åˆ™ä½¿ç”¨Catalina.home/binä¸‹çš„Bootstrap.jaré‡Œçš„/org/apache/catalina/startup/catalina.properties
+        //è¯»å–Catalina.propertieså…³äºclassLoaderçš„åŠ è½½ä¿¡æ¯ é…ç½®æ¥åˆå§‹åŒ–classLoader 
+        //å¦‚æœæ²¡æœ‰é…ç½®,åˆ™é»˜è®¤ä½¿ç”¨å½“å‰çš„ç±»åŠ è½½å™¨ åˆ†åˆ«åˆå§‹åŒ–common.loader shared.loader server.loader
+        //common.loaderä¸ºshared.loader/server.loaderçš„çˆ¶åŠ è½½å™¨
         initClassLoaders();
-        //½«CatalinaLoader¼ÓÔØÆ÷·Åµ½µ±Ç°Ïß³ÌÖĞ
+        //å°†CatalinaLoaderåŠ è½½å™¨æ”¾åˆ°å½“å‰çº¿ç¨‹ä¸­
         Thread.currentThread().setContextClassLoader(catalinaLoader);
-        //Ô¤¼ÓÔØtomcatºËĞÄÀà
+        //é¢„åŠ è½½tomcatæ ¸å¿ƒç±»
         SecurityClassLoad.securityClassLoad(catalinaLoader);
 
         // Load our startup class and call its process() method
         if (log.isDebugEnabled())
             log.debug("Loading startup class");
-        //Í¨¹ı·´ÉäÊµÀı»¯CatalinaÊµÀı¶ÔÏó
+        //é€šè¿‡åå°„å®ä¾‹åŒ–Catalinaå®ä¾‹å¯¹è±¡
         Class<?> startupClass =
             catalinaLoader.loadClass
             ("org.apache.catalina.startup.Catalina");
@@ -429,7 +429,7 @@ public final class Bootstrap {
             // Don't set daemon until init() has completed
             Bootstrap bootstrap = new Bootstrap();
             try {
-            	//³õÊ¼»¯ classLoaderÓëtomcatÆô¶¯ÊµÀı¶ÔÏóCatalina
+            	//åˆå§‹åŒ– classLoaderä¸tomcatå¯åŠ¨å®ä¾‹å¯¹è±¡Catalina
                 bootstrap.init();
             } catch (Throwable t) {
                 handleThrowable(t);
@@ -452,7 +452,7 @@ public final class Bootstrap {
 
             if (command.equals("startd")) {
                 args[args.length - 1] = "start";
-                //·´Éäµ÷ÓÃCatalina¶ÔÏóµÄload(xx)·½·¨ Æô¶¯tomcatÈë¿Ú
+                //åå°„è°ƒç”¨Catalinaå¯¹è±¡çš„load(xx)æ–¹æ³• å¯åŠ¨tomcatå…¥å£
                 daemon.load(args);
                 daemon.start();
             } else if (command.equals("stopd")) {
