@@ -100,3 +100,7 @@ protected synchronized void startInternal() throws LifecycleException {
 ```
 *  接下来的启动流程依次为 engine->host->context-wrapper，由于StandardEngine/StandardHost/StandardContext/StandardWrapper均继承了ContainerBase 故启动流程类似于Engine容器。
 
+tomcat 运行流程
+----------
+
+![](https://github.com/sdw2330976/apache-tomcat-7.0.57/tree/master/mydoc/uml/tomcat-launch.png)
