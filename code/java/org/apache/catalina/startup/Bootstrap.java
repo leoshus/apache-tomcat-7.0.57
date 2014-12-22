@@ -84,7 +84,8 @@ public final class Bootstrap {
 
     // -------------------------------------------------------- Private Methods
 
-
+    //默认情况下 没有配置catalinaLoader与sharedLoader 故 commonLoader=catalinaLoader=sharedLoader
+    //commonLoader 加载${catalina.base}/lib,${catalina.base}/lib/*.jar,${catalina.home}/lib,${catalina.home}/lib/*.jar 目录中的所有jar包
     private void initClassLoaders() {
         try {
             commonLoader = createClassLoader("common", null);
@@ -101,18 +102,24 @@ public final class Bootstrap {
         }
     }
 
-
+    /**
+     * @param name 对应catalina.properties文件中的三个属性：common.loader server.loader shared.loader 默认情况下,只配置了
+     * common.server其他两个为空 故 默认common.loader = server.loader = shared.loader
+     * @param parent
+     * @return
+     * @throws Exception
+     */
     private ClassLoader createClassLoader(String name, ClassLoader parent)
         throws Exception {
 
         String value = CatalinaProperties.getProperty(name + ".loader");
         if ((value == null) || (value.equals("")))
             return parent;
-
+        //替换其中的环境变量,如${catalina.home}/${catalina.base}
         value = replace(value);
 
         List<Repository> repositories = new ArrayList<Repository>();
-
+        //launch/lib,launch/lib/*.jar,launch/lib,launch/lib/*.jar  按照','将其分割
         StringTokenizer tokenizer = new StringTokenizer(value, ",");
         while (tokenizer.hasMoreElements()) {
             String repository = tokenizer.nextToken().trim();
