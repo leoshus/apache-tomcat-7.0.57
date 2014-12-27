@@ -1,0 +1,5 @@
+ReentrantLock/CountDownLatch/Semaphore/FutureTask/ThreadPoolExecutor的源码中都会包含一个静态的内部类Sync，它继承了AbstractQueuedSynchronizer这个抽象类。
+
+AbstractQueuedSynchronizer是java.util.concurrent包中的核心组件之一，为并发包中的其他synchronizers提供了一组公共的基础设施。
+
+java.util.concurrent.locks.LockSupport
