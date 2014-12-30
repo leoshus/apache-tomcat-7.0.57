@@ -152,7 +152,120 @@ static final class Node {
     }
 ```
 
-####
+####acquire操作
+------------------
+
+```
+/**
+     * 以独占模式(exclusive mode)排他地进行的acquire操作 ，对中断不敏感 完成synchronized语义
+     * 通过调用至少一次的tryAcquire实现 成功时返回
+     * 否则在成功之前，一直调用tryAcquire(int)将线程加入队列,线程可能反复的阻塞和解除阻塞(park/unpark)。
+     * 这个方法可以用于实现Lock.lock()方法
+     * acquire是通过tryAcquire(int)来实现的，直至成功返回时结束，故我们无需自定义这个方法就可用它来实现lock。
+     * tryLock()是通过Sync.tryAquire(1)来实现的
+     * @param arg the acquire argument. 这个值将会被传递给tryAcquire方法 
+     * 但他是不间断的 可以表示任何你喜欢的内容
+     */
+    public final void acquire(int arg) {
+        if (!tryAcquire(arg) &&
+            acquireQueued(addWaiter(Node.EXCLUSIVE), arg))
+            selfInterrupt();
+    }
+    /**
+     * 尝试以独占模式进行acquire操作 这个方法应该查询这个对象状态是否允许以独占模式进行acquire操作,如果允许就获取它
+     * 
+     * 
+     * <p>This method is always invoked by the thread performing
+     * acquire.  If this method reports failure, the acquire method
+     * may queue the thread, if it is not already queued, until it is
+     * signalled by a release from some other thread. This can be used
+     * to implement method {@link Lock#tryLock()}.
+     *
+     * 默认实现抛出UnsupportedOperationException异常
+     *
+     * @param arg the acquire argument. This value is always the one
+     *        passed to an acquire method, or is the value saved on entry
+     *        to a condition wait.  The value is otherwise uninterpreted
+     *        and can represent anything you like.
+     * @return {@code true} if successful. Upon success, this object has
+     *         been acquired.
+     * @throws IllegalMonitorStateException if acquiring would place this
+     *         synchronizer in an illegal state. This exception must be
+     *         thrown in a consistent fashion for synchronization to work
+     *         correctly.
+     * @throws UnsupportedOperationException if exclusive mode is not supported
+     */
+    protected boolean tryAcquire(int arg) {
+        throw new UnsupportedOperationException();
+    }
+    /**
+     * 以独占不可中断模式
+     * Acquires in exclusive uninterruptible mode for thread already in
+     * queue. Used by condition wait methods as well as acquire.
+     *
+     * @param node the node
+     * @param arg the acquire argument
+     * @return {@code true} if interrupted while waiting
+     */
+    final boolean acquireQueued(final Node node, int arg) {
+        try {
+            boolean interrupted = false;//记录线程是否曾经被中断过
+            for (;;) {//死循环 用于acquire获取失败重试
+                final Node p = node.predecessor();//获取结点的前驱结点
+                if (p == head && tryAcquire(arg)) {//若前驱为头结点  继续尝试获取
+                    setHead(node);
+                    p.next = null; // help GC
+                    return interrupted;
+                }
+                if (shouldParkAfterFailedAcquire(p, node) && //
+                    parkAndCheckInterrupt())
+                    interrupted = true;
+            }
+        } catch (RuntimeException ex) {
+            cancelAcquire(node);
+            throw ex;
+        }
+    }
+     /**
+     * 检查并更新acquire获取失败的结点的状态
+     * Checks and updates status for a node that failed to acquire.
+     * Returns true if thread should block. This is the main signal
+     * control in all acquire loops.  Requires that pred == node.prev
+     *
+     * @param pred node's predecessor holding status
+     * @param node the node
+     * @return {@code true} if thread should block
+     */
+    private static boolean shouldParkAfterFailedAcquire(Node pred, Node node) {
+        int s = pred.waitStatus;
+        if (s < 0)
+            /*
+             * This node has already set status asking a release
+             * to signal it, so it can safely park
+             */
+            return true;
+        if (s > 0) {
+            /*
+             * Predecessor was cancelled. Skip over predecessors and
+             * indicate retry.
+             */
+	    do {
+		node.prev = pred = pred.prev;
+	    } while (pred.waitStatus > 0);
+	    pred.next = node;
+	}
+        else
+            /*
+             * Indicate that we need a signal, but don't park yet. Caller
+             * will need to retry to make sure it cannot acquire before
+             * parking.
+             */
+            compareAndSetWaitStatus(pred, 0, Node.SIGNAL);
+        return false;
+    }
+
+```
+
 nextWaiter一般是作用于在使用Condition时的队列。
 
 java.util.concurrent.locks.LockSupport
