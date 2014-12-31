@@ -102,7 +102,22 @@ static final class Node {
 
 ####acquire操作
 ------------------
-
+获取同步器
+```
+if(尝试获取成功){
+	return ;
+}else{
+	加入队列;park自己
+}
+```
+释放同步器
+```
+if(尝试释放成功){
+	unpark等待队列中的第一个结点
+}else{
+	return false;
+}
+```
 ```
 	/**
      * 以独占模式(exclusive mode)排他地进行的acquire操作 ，对中断不敏感 完成synchronized语义
@@ -555,10 +570,10 @@ condition.signal()方法在Lock上面处理condition等待队列然后将队列�
      */
     private void doSignal(Node first) {
         do {
-            if ( (firstWaiter = first.nextWaiter) == null)
+            if ( (firstWaiter = first.nextWaiter) == null)//将旧的头结点移出 让下一个结点顶替上来
                 lastWaiter = null;
             first.nextWaiter = null;
-        } while (!transferForSignal(first) &&
+        } while (!transferForSignal(first) &&//将旧的头结点加入到AQS的等待队列中
                  (first = firstWaiter) != null);
     }
     /**
@@ -582,6 +597,9 @@ condition.signal()方法在Lock上面处理condition等待队列然后将队列�
          */
         Node p = enq(node);//进入AQS的阻塞队列
         int c = p.waitStatus;
+        //该结点点的状态CANCELLED或者修改状态失败 就直接唤醒该结点内的线程
+        //PS 正常情况下 这里是不会为true的故不会在这里唤醒该线程
+        //只有发送signal信号的线程 调用了reentrantLock.unlock方法后(该线程已经加入到了AQS等待队列)才会被唤醒。
         if (c > 0 || !compareAndSetWaitStatus(p, c, Node.SIGNAL))
             LockSupport.unpark(node.thread);
         return true;
