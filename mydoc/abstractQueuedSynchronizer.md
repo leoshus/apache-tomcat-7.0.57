@@ -99,58 +99,6 @@ static final class Node {
         }
     }
 ```
-####添加结点到等待队列
---------------------
-首先构建一个准备入队列的结点,如果当前队列不为空,则将mode的前驱指向tail(只是指定当前结点的前驱结点,这样下面的操作一即使失败了   也不会影响整个队列的现有连接关系),compareAndSetTail成功将mode设置为tail结点，则将原先的tail结点的后继节点指向mode。如果队列为空亦或者compareAndSetTail操作失败，没关系我们还有enq(node)为我们把关。
-```
-/**
-     *通过给定的线程和模式 创建结点和结点入队列操作
-     *
-     * @param current the thread 当前线程
-     * @param mode Node.EXCLUSIVE for exclusive, Node.SHARED for shared 独占和共享模式
-     * @return the new node
-     */
-    private Node addWaiter(Node mode) {
-        Node node = new Node(Thread.currentThread(), mode);
-        // Try the fast path of enq; backup to full enq on failure
-        Node pred = tail;
-        if (pred != null) {
-            node.prev = pred;//只是指定当前结点的前驱结点,这样下面的操作一即使失败了   也不会影响整个队列的现有连接关系
-            if (compareAndSetTail(pred, node)) {//原子地设置node为tail结点 CAS操作 操作一
-                pred.next = node;
-                return node;
-            }
-        }
-        enq(node);//操作一失败时  这里会重复检查亡羊补牢一下  官方说法 double-check
-        return node;
-    }
-    /**
-     * 将结点插入队列 必要时进行初始化操作
-     * @param node 带插入结点
-     * @return node's predecessor 返回当前结点的前驱结点
-     */
-    private Node enq(final Node node) {
-        for (;;) {
-            Node t = tail;
-            if (t == null) { // Must initialize 当前队列为空 进行初始化操作
-                Node h = new Node(); // Dummy header 傀儡头结点
-                h.next = node;
-                node.prev = h;
-                if (compareAndSetHead(h)) {//原子地设置头结点
-                    tail = node;//头尾同一结点
-                    return h;
-                }
-            }
-            else {
-                node.prev = t;
-                if (compareAndSetTail(t, node)) {//原子地设置tail结点 上面操作一的增强操作
-                    t.next = node;
-                    return t;
-                }
-            }
-        }
-    }
-```
 
 ####acquire操作
 ------------------
@@ -217,7 +165,7 @@ static final class Node {
                     p.next = null; // help GC
                     return interrupted;
                 }
-                ////检查是否需要等待 如果需要就park当前线程  只有前驱在等待时才进入等待 否则继续重试
+                ////检查是否需要等待(检查前驱结点的waitStatus的值>0/<0/=0) 如果需要就park当前线程  只有前驱在等待时才进入等待 否则继续重试
                 if (shouldParkAfterFailedAcquire(p, node) && 
                     parkAndCheckInterrupt())//线程进入等待需要，需要其他线程唤醒这个线程以继续执行
                     interrupted = true;//只要线程在等待过程中被中断过一次就会被记录下来
@@ -261,7 +209,7 @@ static final class Node {
 	}
         else
             /*
-             * 前驱结点的状态为0时
+             * 前驱结点的状态为0时表示为新建的 需要设置成SIGNAL(-1)
              * 声明我们需要一个信号但是暂时还不park 调用者将需要重试保证它在parking之前不被acquire
              * Indicate that we need a signal, but don't park yet. Caller
              * will need to retry to make sure it cannot acquire before
@@ -281,15 +229,68 @@ static final class Node {
     }
 ```
 
+####添加结点到等待队列
+--------------------
+
+首先构建一个准备入队列的结点,如果当前队列不为空,则将mode的前驱指向tail(只是指定当前结点的前驱结点,这样下面的操作一即使失败了   也不会影响整个队列的现有连接关系),compareAndSetTail成功将mode设置为tail结点，则将原先的tail结点的后继节点指向mode。如果队列为空亦或者compareAndSetTail操作失败，没关系我们还有enq(node)为我们把关。
+```
+/**
+     *通过给定的线程和模式 创建结点和结点入队列操作
+     *
+     * @param current the thread 当前线程
+     * @param mode Node.EXCLUSIVE for exclusive, Node.SHARED for shared 独占和共享模式
+     * @return the new node
+     */
+    private Node addWaiter(Node mode) {
+        Node node = new Node(Thread.currentThread(), mode);
+        // Try the fast path of enq; backup to full enq on failure
+        Node pred = tail;
+        if (pred != null) {
+            node.prev = pred;//只是指定当前结点的前驱结点,这样下面的操作一即使失败了   也不会影响整个队列的现有连接关系
+            if (compareAndSetTail(pred, node)) {//原子地设置node为tail结点 CAS操作 操作一
+                pred.next = node;
+                return node;
+            }
+        }
+        enq(node);//操作一失败时  这里会重复检查亡羊补牢一下  官方说法 double-check
+        return node;
+    }
+    /**
+     * 将结点插入队列 必要时进行初始化操作
+     * @param node 带插入结点
+     * @return node's predecessor 返回当前结点的前驱结点
+     */
+    private Node enq(final Node node) {
+        for (;;) {
+            Node t = tail;
+            if (t == null) { // Must initialize 当前队列为空 进行初始化操作
+                Node h = new Node(); // Dummy header 傀儡头结点
+                h.next = node;
+                node.prev = h;
+                if (compareAndSetHead(h)) {//原子地设置头结点
+                    tail = node;//头尾同一结点
+                    return h;
+                }
+            }
+            else {
+                node.prev = t;
+                if (compareAndSetTail(t, node)) {//原子地设置tail结点 上面操作一的增强操作
+                    t.next = node;
+                    return t;
+                }
+            }
+        }
+    }
+```
+
 ####acquire 取消结点
 -------------------
-取消结点操作：首先会判断结点是否为null,若不为空，while循环查找距离当前结点最近的非取消前驱结点(方便GC处理取消的结点)，然后取出这个前驱的后继结点
-指向，利用它来感知其他的取消或信号操作(例如 compareAndSetNext(pred, predNext, null))
+取消结点操作：首先会判断结点是否为null,若不为空，while循环查找距离当前结点最近的非取消前驱结点PN(方便GC处理取消的结点)，然后取出这个前驱的后继结点指向，利用它来感知其他的取消或信号操作(例如 compareAndSetNext(pred, predNext, null))
 然后将当前结点的状态Status设置为CANCELLED
 
-* 当前结点如果是尾结点,就删除当前结点，将找到的非取消前驱结点SN设置为tail,并原子地将其后继指向为null
+* 当前结点如果是尾结点,就删除当前结点，将找到的非取消前驱结点PN设置为tail,并原子地将其后继指向为null
 
-* 当前结点存在后继结点PN,如果前驱结点需要signal,则将SN的后继指向PN;否则将通过unparkSuccessor(node);唤醒后继结点
+* 当前结点存在后继结点SN,如果前驱结点需要signal,则将PN的后继指向SN;否则将通过unparkSuccessor(node);唤醒后继结点
 
 ```
 	/**
@@ -360,6 +361,232 @@ static final class Node {
         if (s != null)//结点不为空 唤醒后继的等待线程
             LockSupport.unpark(s.thread);
     } 
+```
+
+回过头来总结一下：
+当我们调用acquire(int)时,会首先通过tryAcquire尝试获取锁,一般都是留给子类实现(例如ReetrantLock$FairSync中的实现)
+
+```
+		/**
+		 * tryAcquire的公平版本
+         * Fair version of tryAcquire.  Don't grant access unless
+         * recursive call or no waiters or is first.
+         */
+        protected final boolean tryAcquire(int acquires) {
+            final Thread current = Thread.currentThread();
+            int c = getState();
+            if (c == 0) {
+                if (isFirst(current) &&
+                    compareAndSetState(0, acquires)) {
+                    setExclusiveOwnerThread(current);
+                    return true;
+                }
+            }
+            else if (current == getExclusiveOwnerThread()) {
+                int nextc = c + acquires;
+                if (nextc < 0)
+                    throw new Error("Maximum lock count exceeded");
+                setState(nextc);
+                return true;
+            }
+            return false;
+        }
+```
+如果tryAcquire(int)返回为false,则说明没有获得到锁。 则!tryAcquire(int)为true，接着会继续调用acquireQueued(final Node node ,int arg)方法，当然这调用这个方法之前,我们需要将当前包装成Node加入到队列中(即调用addWaiter(Node mode))。
+在acquireQueued()方法体中,我们会发现一个死循环，唯一跳出死循环的途径是 直到找到一个(条件1)node的前驱是傀儡head结点并且子类的tryAcquire()返回true,那么就将当前结点设置为head结点并返回结点对于线程的中断状态。如果(条件1)不成立,则执行shouldParkAfterFailuredAcquire()
+在shouldParkAfterFailuredAcquire(Node pred,Node node)方法体中,
+首先会判断node结点的前驱结点pred的waitStatus的值：
+* 如果waitStatus>0，表明pred处于取消状态(CANCELLED)则从队列中移除pred。
+* 如果waitStatus<0,表明线程需要park住
+* 如果waitStatus=0,表明这是一个新建结点,需要设置成SIGNAL(-1),在下一次循环中如果不能获得锁就需要park住线程,parkAndCheckInterrupt()就是执行了park()方法来park线程并返回线程中断状态。
+
+```
+ private final boolean parkAndCheckInterrupt() {
+        LockSupport.park(this);
+        return Thread.interrupted();
+    }
+```
+如果中间抛出RuntimeException异常,则会调用cancelAcquire(Node)方法取消获取。取消其实也很简单，首先判断node是否为空，如果不为空，找到node最近的非取消前驱结点PN，并将node的status设置为CANCELLED；
+* 倘若node为tail，将node移除并将PN结点设置为tail PN的后继指向null
+* 倘若node存在后继结点SN，如果前驱结点PN需要signal,则将PN后继指向SN 否则调用unparkSuccessor(Node)唤醒后继SN
+
+
+番外篇
+
+####AcquireShared共享锁
+------------
+
+```
+	/**
+	 * 以共享模式获取Acquire 对中断不敏感
+	 * 通过多次调用tryAcquireShared方法来实现 成功时返回
+	 * 否则线程加入Sync队列 可能重复进行阻塞和释放阻塞 调用tryAcquireShared知道成功
+     *
+     * @param arg the acquire argument.  This value is conveyed to
+     *        {@link #tryAcquireShared} but is otherwise uninterpreted
+     *        and can represent anything you like.
+     */
+    public final void acquireShared(int arg) {
+        if (tryAcquireShared(arg) < 0)
+            doAcquireShared(arg);
+    }
+    /**
+     * 以共享不可中断模式获取Acquire
+     * Acquires in shared uninterruptible mode.
+     * @param arg the acquire argument
+     */
+    private void doAcquireShared(int arg) {
+        final Node node = addWaiter(Node.SHARED);
+        try {
+            boolean interrupted = false;
+            for (;;) {
+                final Node p = node.predecessor();
+                if (p == head) {
+                    int r = tryAcquireShared(arg);
+                    if (r >= 0) {
+                        setHeadAndPropagate(node, r);
+                        p.next = null; // help GC
+                        if (interrupted)
+                            selfInterrupt();
+                        return;
+                    }
+                }
+                if (shouldParkAfterFailedAcquire(p, node) &&
+                    parkAndCheckInterrupt())
+                    interrupted = true;
+            }
+        } catch (RuntimeException ex) {
+            cancelAcquire(node);
+            throw ex;
+        }
+    }
+    /**
+     * Sets head of queue, and checks if successor may be waiting
+     * in shared mode, if so propagating if propagate > 0.
+     *
+     * @param pred the node holding waitStatus for node
+     * @param node the node
+     * @param propagate the return value from a tryAcquireShared
+     */
+    private void setHeadAndPropagate(Node node, int propagate) {
+        setHead(node);//队列向后移一位
+        if (propagate > 0 && node.waitStatus != 0) {//propagate>0表明共享数值大于前面要求的数值
+            /*
+             * Don't bother fully figuring out successor.  If it
+             * looks null, call unparkSuccessor anyway to be safe.
+             */
+            Node s = node.next;
+            if (s == null || s.isShared())//如果剩下只有一个node或者node.next是共享的 需要park住该线程
+                unparkSuccessor(node);
+        }
+    }
+```
+
+####条件Condition
+-------------------
+Condition是服务单个Lock,condition.await()等方法在Lock上形成一个condition等待队列
+condition.signal()方法在Lock上面处理condition等待队列然后将队列中的node加入到AQS的阻塞队列中等待对应的线程被unpark
+```
+	/**
+	 * 实现可中断的条件等待
+	 * <ol>
+	 * <li> If current thread is interrupted, throw InterruptedException
+	 * <li> Save lock state returned by {@link #getState}
+	 * <li> Invoke {@link #release} with
+	 *      saved state as argument, throwing
+	 *      IllegalMonitorStateException  if it fails.
+	 * <li> Block until signalled or interrupted
+	 * <li> Reacquire by invoking specialized version of
+	 *      {@link #acquire} with saved state as argument.
+	 * <li> If interrupted while blocked in step 4, throw exception
+	 * </ol>
+	 */
+	public final void await() throws InterruptedException {
+	    if (Thread.interrupted())
+	        throw new InterruptedException();
+	    Node node = addConditionWaiter();//加入到condition的对用lock的私有队列中，与AQS阻塞队列形成相似
+	    //释放这个condition对应的lock的锁 因为若这个await方法阻塞住而lock没有释放锁
+	    //那么对于其他线程的node来说肯定是阻塞住的
+	    //因为condition对应的lock获得了锁，肯定在AQS的header处，其他线程肯定是得不到锁阻塞在那里，这样两边都阻塞的话就死锁了
+	    //故这里需要释放对应的lock锁
+	    int savedState = fullyRelease(node);
+	    int interruptMode = 0;
+	    while (!isOnSyncQueue(node)) {//判断condition是否已经转化成AQS阻塞队列中的一个结点 如果没有park这个线程
+	        LockSupport.park(this);
+	        if ((interruptMode = checkInterruptWhileWaiting(node)) != 0)
+	            break;
+	    }
+	    //这一步需要signal()或signalAll()方法的执行 说明这个线程已经被unpark 然后运行直到acquireQueued尝试再次获得锁
+	    if (acquireQueued(node, savedState) && interruptMode != THROW_IE)
+	        interruptMode = REINTERRUPT;
+	    if (node.nextWaiter != null)
+	        unlinkCancelledWaiters();
+	    if (interruptMode != 0)
+	        reportInterruptAfterWait(interruptMode);
+	}
+
+```
+这个AQS存在两中链表
+* 一种链表是AQS sync链表队列，可称为 横向链表
+* 一种链表是Condition的wait Node链表，相对于AQS sync是结点的一个纵向链表
+当纵向链表被signal通知后 会进入对应的Sync进行排队处理
+
+```
+	/**
+     * Moves the longest-waiting thread, if one exists, from the
+     * wait queue for this condition to the wait queue for the
+     * owning lock.
+     *
+     * @throws IllegalMonitorStateException if {@link #isHeldExclusively}
+     *         returns {@code false}
+     */
+    public final void signal() {
+        if (!isHeldExclusively())
+            throw new IllegalMonitorStateException();
+        Node first = firstWaiter;
+        if (first != null)
+            doSignal(first);
+    }
+    /**
+     * Removes and transfers nodes until hit non-cancelled one or
+     * null. Split out from signal in part to encourage compilers
+     * to inline the case of no waiters.
+     * @param first (non-null) the first node on condition queue
+     */
+    private void doSignal(Node first) {
+        do {
+            if ( (firstWaiter = first.nextWaiter) == null)
+                lastWaiter = null;
+            first.nextWaiter = null;
+        } while (!transferForSignal(first) &&
+                 (first = firstWaiter) != null);
+    }
+    /**
+     * Transfers a node from a condition queue onto sync queue.
+     * Returns true if successful.
+     * @param node the node
+     * @return true if successfully transferred (else the node was
+     * cancelled before signal).
+     */
+    final boolean transferForSignal(Node node) {
+        /*
+         * If cannot change waitStatus, the node has been cancelled.
+         */
+        if (!compareAndSetWaitStatus(node, Node.CONDITION, 0))
+            return false;
+        /*
+         * Splice onto queue and try to set waitStatus of predecessor to
+         * indicate that thread is (probably) waiting. If cancelled or
+         * attempt to set waitStatus fails, wake up to resync (in which
+         * case the waitStatus can be transiently and harmlessly wrong).
+         */
+        Node p = enq(node);//进入AQS的阻塞队列
+        int c = p.waitStatus;
+        if (c > 0 || !compareAndSetWaitStatus(p, c, Node.SIGNAL))
+            LockSupport.unpark(node.thread);
+        return true;
+    }
+    
 ```
 nextWaiter一般是作用于在使用Condition时的队列。
 
