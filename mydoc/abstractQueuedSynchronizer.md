@@ -156,7 +156,7 @@ static final class Node {
 ------------------
 
 ```
-/**
+	/**
      * 以独占模式(exclusive mode)排他地进行的acquire操作 ，对中断不敏感 完成synchronized语义
      * 通过调用至少一次的tryAcquire实现 成功时返回
      * 否则在成功之前，一直调用tryAcquire(int)将线程加入队列,线程可能反复的阻塞和解除阻塞(park/unpark)。
@@ -217,17 +217,20 @@ static final class Node {
                     p.next = null; // help GC
                     return interrupted;
                 }
-                if (shouldParkAfterFailedAcquire(p, node) && //
-                    parkAndCheckInterrupt())
-                    interrupted = true;
+                ////检查是否需要等待 如果需要就park当前线程  只有前驱在等待时才进入等待 否则继续重试
+                if (shouldParkAfterFailedAcquire(p, node) && 
+                    parkAndCheckInterrupt())//线程进入等待需要，需要其他线程唤醒这个线程以继续执行
+                    interrupted = true;//只要线程在等待过程中被中断过一次就会被记录下来
             }
         } catch (RuntimeException ex) {
+        	//acquire失败  取消acquire
             cancelAcquire(node);
             throw ex;
         }
     }
      /**
      * 检查并更新acquire获取失败的结点的状态
+     * 信号控制的核心
      * Checks and updates status for a node that failed to acquire.
      * Returns true if thread should block. This is the main signal
      * control in all acquire loops.  Requires that pred == node.prev
@@ -240,12 +243,14 @@ static final class Node {
         int s = pred.waitStatus;
         if (s < 0)
             /*
+             * 这个结点已经设置状态要求对他释放一个信号 所以他是安全的等待
              * This node has already set status asking a release
              * to signal it, so it can safely park
              */
             return true;
         if (s > 0) {
             /*
+             * 前驱结点被取消 跳过前驱结点 并尝试重试 知道找到一个未取消的前驱结点
              * Predecessor was cancelled. Skip over predecessors and
              * indicate retry.
              */
@@ -256,6 +261,8 @@ static final class Node {
 	}
         else
             /*
+             * 前驱结点的状态为0时
+             * 声明我们需要一个信号但是暂时还不park 调用者将需要重试保证它在parking之前不被acquire
              * Indicate that we need a signal, but don't park yet. Caller
              * will need to retry to make sure it cannot acquire before
              * parking.
@@ -263,9 +270,98 @@ static final class Node {
             compareAndSetWaitStatus(pred, 0, Node.SIGNAL);
         return false;
     }
-
+	/**
+	 * park当前线程方便的方法 并且然后会检查当前线程是否中断
+     *
+     * @return {@code true} if interrupted
+     */
+    private final boolean parkAndCheckInterrupt() {
+        LockSupport.park(this);
+        return Thread.interrupted();
+    }
 ```
 
+####acquire 取消结点
+-------------------
+取消结点操作：首先会判断结点是否为null,若不为空，while循环查找距离当前结点最近的非取消前驱结点(方便GC处理取消的结点)，然后取出这个前驱的后继结点
+指向，利用它来感知其他的取消或信号操作(例如 compareAndSetNext(pred, predNext, null))
+然后将当前结点的状态Status设置为CANCELLED
+
+* 当前结点如果是尾结点,就删除当前结点，将找到的非取消前驱结点SN设置为tail,并原子地将其后继指向为null
+
+* 当前结点存在后继结点PN,如果前驱结点需要signal,则将SN的后继指向PN;否则将通过unparkSuccessor(node);唤醒后继结点
+
+```
+	/**
+	 * 取消一个将要尝试acquire的结点
+     *
+     * @param node the node
+     */
+    private void cancelAcquire(Node node) {
+	// 如果结点不存在就直接返回
+        if (node == null)
+	    return;
+	node.thread = null;
+	// 跳过取消的结点 while循环直到找到一个未取消的结点
+	Node pred = node.prev;
+	while (pred.waitStatus > 0)
+	    node.prev = pred = pred.prev;
+	//前面的操作导致前驱结点发送变化 但是pred的后继结点还是没有变化
+	Node predNext = pred.next;//通过predNext来感知其他的取消或信号操作 例如 compareAndSetNext(pred, predNext, null)
+	//这里用无条件的写来代替CAS操作
+	node.waitStatus = Node.CANCELLED;
+	// 如果当前node是tail结点 就删除当前结点 
+	if (node == tail && compareAndSetTail(node, pred)) {
+	    compareAndSetNext(pred, predNext, null);//原子地将node结点之前的第一个非取消结点设置为tail结点 并将其后继指向null
+	} else {
+	    // 如果前驱不是头结点 并且前驱的状态为SIGNAL(或前驱需要signal)
+	    if (pred != head
+		&& (pred.waitStatus == Node.SIGNAL
+		    || compareAndSetWaitStatus(pred, 0, Node.SIGNAL))
+		&& pred.thread != null) {
+		//如果node存在后继结点 将node的前驱结点的后继指向node的后继
+		Node next = node.next;
+		if (next != null && next.waitStatus <= 0)
+		    compareAndSetNext(pred, predNext, next);//原子地将pred的后继指向node的后继
+	    } else {
+	    //node没有需要signal的前驱，通知后继结点
+		unparkSuccessor(node);
+	    }
+	    node.next = node; // help GC
+	}
+    }}
+   
+####唤醒后继结点 unparkSuccessor
+---------------
+唤醒后继结点操作:首先会尝试清除当前结点的预期信号,这里即使操作失败亦或是信号已经被其他等待线程改变 都不影响
+然后查找当前线程最近的一个非取消结点 并唤醒它
+```
+ 	/**
+ 	 * 如果存在后继结点 就唤醒它
+     *
+     * @param node the node
+     */
+    private void unparkSuccessor(Node node) {
+        /*
+         * 尝试清除预期信号 如果操作失败或该状态被其他等待线程改变 也没关系
+         */
+        compareAndSetWaitStatus(node, Node.SIGNAL, 0);
+        /*
+         * 准备unpark的线程在后继结点里持有(通常就是下一个结点)
+         * 但如果被取消或为空  那么就从tail向后开始遍历查找实际的非取消后继结点
+         */
+        Node s = node.next;
+        if (s == null || s.waitStatus > 0) {
+            s = null;
+            for (Node t = tail; t != null && t != node; t = t.prev)
+                if (t.waitStatus <= 0)
+                    s = t;//找到一个后并不跳出for循环 为了找到一个距离node最近的非取消后继结点
+        }
+        if (s != null)//结点不为空 唤醒后继的等待线程
+            LockSupport.unpark(s.thread);
+    } 
+```
 nextWaiter一般是作用于在使用Condition时的队列。
 
 java.util.concurrent.locks.LockSupport
+condition 理解http://www.blogjava.net/images/blogjava_net/nod0620/animation.gif
